@@ -30,7 +30,7 @@ export default {
   transition: 0.3s;
 }
 
-.button_theme_root {
+.button_theme_main {
   margin: 0 auto;
   padding: 15px;
   font-size: 24px;
