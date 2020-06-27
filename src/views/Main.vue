@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     togglePopupVisible() {
-      console.log("as");
       return this.$store.dispatch("togglePopupVisible");
     }
   },

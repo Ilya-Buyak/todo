@@ -22,7 +22,6 @@ export default {
   background: none;
   text-align: center;
   outline: none;
-  display: block;
 }
 
 .button:hover {
@@ -37,6 +36,7 @@ export default {
   font-weight: 500;
   color: white;
   background-color: #7f89ff;
+  display: block;
 }
 .button_theme_card {
   padding: 15px 15px;
@@ -47,14 +47,21 @@ export default {
   font-size: 16px;
   margin: auto 0 0 0;
 }
-.button_theme_delete {
+.button_theme_remove {
   background: url(../../assets/trash-icon.svg) center no-repeat;
-  border: none;
   width: 18px;
   height: 20px;
-  position: absolute;
-  top: 7px;
-  right: 15px;
-  cursor: pointer;
+}
+.button_theme_note {
+  width: 15%;
+  height: 100%;
+}
+
+.button_theme_add {
+  background-color: #fff;
+  color: #7f89ff;
+  padding: 10px;
+  font-size: 20px;
+  line-height: 24px;
 }
 </style>

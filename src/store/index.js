@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import cardsList from "./modules/cardsList";
 import popup from "./modules/popup";
+import cardsList from "./modules/cardList";
 
 Vue.use(Vuex);
 
@@ -10,7 +10,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    cardsList,
-    popup
+    popup,
+    cardsList
   }
 });

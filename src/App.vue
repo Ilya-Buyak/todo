@@ -20,14 +20,10 @@ html {
   box-sizing: border-box;
 }
 *,
-*::before,
-*::after {
-  box-sizing: inherit;
+*:before,
+*:after {
+  box-sizing: border-box;
   margin: 0;
-}
-body {
-  margin: 0;
-  padding: 0;
 }
 
 .root {

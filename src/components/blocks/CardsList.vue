@@ -1,13 +1,13 @@
 <template>
   <ul v-if="hasCards" class="cards">
-    <li class="card" v-for="card in cards" :key="card.id">
-      <h2 class="card__title">{{ card.title }}</h2>
-      <delete-btn theme="delete" />
-      <p class="card__text">Составить план</p>
-      <p class="card__text">Сделать структуру</p>
-      <p class="card__text">Написать ui компоненты</p>
-      <p class="card__text">Сделать главную страницу</p>
-      <p class="card__text">Сделать страницу изменения карточки</p>
+    <li class="card" v-for="(card, id) in cards" :key="card.id">
+      <div class="card__header">
+        <h2 class="card__title">{{ card.title }}</h2>
+        <delete-btn theme="remove" @btn-click="removeCard(id)" />
+      </div>
+      <p class="card__text" v-for="note in card.notes" :key="note.id">
+        {{ note }}
+      </p>
       <edit-btn theme="card">изменить</edit-btn>
     </li>
   </ul>
@@ -20,10 +20,15 @@ import Button from "@/components/ui/Button";
 export default {
   computed: {
     cards() {
-      return this.$store.getters.cards;
+      return this.$store.getters.getCards;
     },
     hasCards() {
       return this.$store.getters.cardsLength;
+    }
+  },
+  methods: {
+    removeCard(id) {
+      this.$store.dispatch("removeCard", id);
     }
   },
   components: {
@@ -46,7 +51,6 @@ export default {
   list-style: none;
 }
 .card {
-  position: relative;
   display: flex;
   flex-direction: column;
   border: none;
@@ -55,11 +59,16 @@ export default {
   border-radius: 10px;
   min-height: 250px;
 }
-
-.card__title {
-  padding-left: 15px;
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
   background-color: #fff;
   border-radius: 10px 10px 0 0;
+}
+.card__title {
+  background-color: #fff;
 }
 .card__text {
   margin: 10px 0 0 10px;
