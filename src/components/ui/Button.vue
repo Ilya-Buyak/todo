@@ -65,6 +65,5 @@ export default {
 }
 .button_theme_home {
   font-size: 24px;
-  margin-top: 50px;
 }
 </style>

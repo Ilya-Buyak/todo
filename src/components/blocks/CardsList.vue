@@ -90,4 +90,20 @@ export default {
 .card__router {
   margin: auto 0 0 0;
 }
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 650px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 400px;
+  }
+}
 </style>

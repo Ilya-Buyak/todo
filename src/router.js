@@ -16,6 +16,11 @@ export default new Router({
       path: "/:id",
       name: "card",
       component: () => import("@/views/Card.vue")
+    },
+    {
+      path: "*",
+      name: "notFound",
+      component: () => import("@/views/NotFound.vue")
     }
   ]
 });

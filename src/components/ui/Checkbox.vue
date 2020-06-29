@@ -26,15 +26,15 @@
             {{ todo.text }}
           </p>
           <div v-if="editPage" class="change__todo">
-            <change-todo
+            <add-todo
               v-if="todo.edit"
               @btn-click="changeTodo(changedTodo, index, id)"
               ><img
                 class="todo__icon"
                 src="../../assets/doneBlack.svg"
                 alt="изменить заметку"
-            /></change-todo>
-            <add-todo
+            /></add-todo>
+            <change-todo
               v-else
               v-model="todo.edit"
               @btn-click="addInput(index, id)"
@@ -42,7 +42,7 @@
                 class="todo__icon"
                 src="../../assets/edit-icon.svg"
                 alt="редактировать заметку"
-            /></add-todo>
+            /></change-todo>
             <cancel-change v-if="todo.edit" @btn-click="undo"
               ><img
                 class="todo__icon"
@@ -214,6 +214,8 @@ export default {
   outline: none;
   margin-left: 10px;
   font-size: 22px;
+  padding: 0;
+  max-width: 100%;
 }
 .new-todo__input::placeholder {
   color: #fff;

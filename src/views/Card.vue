@@ -23,16 +23,12 @@
       </div>
     </div>
   </main>
-  <main v-else class="main">
-    <h1 class="main__title">Упс... Страница не найдена</h1>
-    <router-link to="/"
-      ><home-button theme="home">Вернуться на главную</home-button></router-link
-    >
-  </main>
+  <NotFound v-else />
 </template>
 <script>
 import Button from "@/components/ui/Button";
 import Checkbox from "@/components/ui/Checkbox";
+import NotFound from "@/views/NotFound.vue";
 
 export default {
   components: {
@@ -40,7 +36,7 @@ export default {
     todos: Checkbox,
     "save-button": Button,
     "cancel-button": Button,
-    "home-button": Button
+    NotFound
   },
   computed: {
     index() {
@@ -76,9 +72,6 @@ export default {
 <style scoped>
 .main {
   max-width: 1440px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .main__content {
   position: relative;
