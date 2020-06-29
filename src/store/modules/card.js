@@ -28,6 +28,7 @@ const mutations = {
     todo.text = payload.changedTodo;
   },
   addNewTodo(state, payload) {
+    if (!payload.newTodo) return;
     state.cards[payload.index].todos.push({
       completed: false,
       edit: false,

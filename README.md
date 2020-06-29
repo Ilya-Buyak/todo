@@ -1,5 +1,6 @@
 # Приложение заметки
  Выполнено в качестве тестового задания
+ https://vuejs-todo-application.herokuapp.com
 ## Стек:
 HTML/CSS , BEM, Vue.js
 ## Реализовано: 
