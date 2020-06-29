@@ -100,7 +100,7 @@ export default {
 .main__button {
   margin-left: 25px;
 }
-@media (max-width: 362px) {
+@media screen and (max-width: 362px) {
   .main__footer {
     display: flex;
     flex-direction: column;
