@@ -57,17 +57,16 @@
                 src="../../assets/redo.svg"
                 alt="повторить отмененное действие"
             /></replay-change>
+            <remove-todo
+              theme="remove"
+              @btn-click="removeTodoFromCardPage(index, id)"
+              type="button"
+            />
           </div>
           <remove-todo
             v-if="isFormShown"
             theme="remove"
             @btn-click="removeTodo(id)"
-            type="button"
-          />
-          <remove-todo
-            v-else
-            theme="remove"
-            @btn-click="removeTodoFromCardPage(index, id)"
             type="button"
           />
         </div>
@@ -167,6 +166,7 @@ export default {
 .todo__content {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .todo__input {
   width: 20px;
@@ -204,6 +204,7 @@ export default {
 }
 .todo__input-text_on {
   display: block;
+  max-width: 100%;
 }
 .todo__icon {
   width: 30px;
@@ -217,7 +218,7 @@ export default {
   margin-left: 10px;
   font-size: 22px;
   padding: 0;
-  max-width: 100%;
+  max-width: 80%;
 }
 .new-todo__input::placeholder {
   color: #fff;
