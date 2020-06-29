@@ -2,15 +2,31 @@
   <div class="root">
     <app-header />
     <router-view />
+    <popup v-if="isPopupShown" />
+    <overlay v-if="isPopupShown" @overlay-click="closePopup" />
   </div>
 </template>
 
 <script>
 import Header from "@/components/blocks/Header";
+import Popup from "@/components/blocks/Popup";
+import Overlay from "@/components/ui/Overlay";
 export default {
   name: "App",
   components: {
-    "app-header": Header
+    "app-header": Header,
+    popup: Popup,
+    overlay: Overlay
+  },
+  computed: {
+    isPopupShown() {
+      return this.$store.getters.isPopupShown;
+    }
+  },
+  methods: {
+    closePopup() {
+      this.$store.dispatch("closePopup");
+    }
   }
 };
 </script>

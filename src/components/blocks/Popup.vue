@@ -1,12 +1,14 @@
 <template>
   <div class="container">
     <div class="popup">
-      <note-form />
+      <todo-form v-if="isFormShown" />
+      <removeCard v-if="isRemoveAlertShown" />
+      <cancel v-if="isCancelAllertShown" />
       <img
         src="../../assets/close.svg"
         class="popup__close"
         alt="закрыть окно"
-        @click="togglePopupVisible"
+        @click="closePopup"
       />
     </div>
   </div>
@@ -14,16 +16,30 @@
 
 <script>
 import Form from "@/components/ui/Form";
+import RemoveAllert from "@/components/ui/RemoveAllert";
+import CancelAllert from "@/components/ui/CancelAllert";
 export default {
   components: {
-    "note-form": Form
+    "todo-form": Form,
+    removeCard: RemoveAllert,
+    cancel: CancelAllert
   },
   methods: {
-    togglePopupVisible() {
-      this.$store.dispatch("togglePopupVisible");
+    closePopup() {
+      this.$store.dispatch("closePopup");
     }
   },
-  computed: {}
+  computed: {
+    isFormShown() {
+      return this.$store.getters.isFormShown;
+    },
+    isRemoveAlertShown() {
+      return this.$store.getters.isRemoveAlertShown;
+    },
+    isCancelAllertShown() {
+      return this.$store.getters.isCancelAllertShown;
+    }
+  }
 };
 </script>
 

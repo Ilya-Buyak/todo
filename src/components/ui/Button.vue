@@ -45,12 +45,12 @@ export default {
   width: 100%;
   text-align: center;
   font-size: 16px;
-  margin: auto 0 0 0;
 }
 .button_theme_remove {
   background: url(../../assets/trash-icon.svg) center no-repeat;
-  width: 18px;
-  height: 20px;
+  background-size: cover;
+  width: 25px;
+  height: 25px;
 }
 .button_theme_note {
   width: 15%;
@@ -60,8 +60,11 @@ export default {
 .button_theme_add {
   background-color: #fff;
   color: #7f89ff;
-  padding: 10px;
   font-size: 20px;
   line-height: 24px;
+}
+.button_theme_home {
+  font-size: 24px;
+  margin-top: 50px;
 }
 </style>

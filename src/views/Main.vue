@@ -1,35 +1,25 @@
 <template>
   <main class="main">
     <h1 class="main__title">Todo List</h1>
-    <main-btn theme="main" @btn-click="togglePopupVisible">
+    <main-btn theme="main" @btn-click="showForm">
       Добавить заметку
     </main-btn>
     <cards-list />
-    <popup v-if="isPopupShown" />
-    <overlay v-if="isPopupShown" @overlay-click="togglePopupVisible" />
   </main>
 </template>
 
 <script>
 import Button from "@/components/ui/Button";
 import CardsList from "@/components/blocks/CardsList";
-import Popup from "@/components/blocks/Popup";
-import Overlay from "@/components/ui/Overlay";
+
 export default {
   components: {
     "main-btn": Button,
-    "cards-list": CardsList,
-    popup: Popup,
-    overlay: Overlay
+    "cards-list": CardsList
   },
   methods: {
-    togglePopupVisible() {
-      return this.$store.dispatch("togglePopupVisible");
-    }
-  },
-  computed: {
-    isPopupShown() {
-      return this.$store.getters.isPopupShown;
+    showForm() {
+      this.$store.dispatch("showForm");
     }
   }
 };

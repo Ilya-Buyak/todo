@@ -14,8 +14,8 @@ export default new Router({
     },
     {
       path: "/:id",
-      name: "id",
-      component: () => import("@/views/_id.vue")
+      name: "card",
+      component: () => import("@/views/Card.vue")
     }
   ]
 });

@@ -1,5 +1,5 @@
 <template>
-  <form class="form" name="form">
+  <form class="form" name="form" @submit.prevent="submitForm(title)">
     <h2 class="form__title">Добавьте заметку</h2>
     <div class="form__container">
       <div class="form__fieldset">
@@ -9,34 +9,33 @@
           id="name"
           placeholder="Введите название заметки"
           v-model="title"
-          @input="validCard"
+          @input="validName"
         />
-        <p class="error">{{ errorName }}</p>
+        <p class="error">{{ errorTitleText }}</p>
       </div>
       <div class="form__fieldset">
-        <label class="form__label" for="note">Заметка</label>
+        <label class="form__label" for="todo">Заметка</label>
         <div class="form__note">
           <input
             class="form__input form__input_note"
-            id="note"
-            name="note"
+            id="todo"
+            name="todo"
             placeholder="Сделать дела"
-            v-model="newNote"
+            v-model="newTodo"
           />
-          <note-button theme="note" type="button" @btn-click="addNote">
+          <addTodo-button
+            theme="note"
+            type="button"
+            @btn-click="addTodo(newTodo)"
+          >
             <img class="form__img" alt="галочка" src="../../assets/done.svg" />
-          </note-button>
+          </addTodo-button>
         </div>
-        <p class="error">{{ errorNotes }}</p>
+        <p class="error">{{ errorTodoText }}</p>
       </div>
     </div>
-    <ul v-if="notes.length" class="form__list-items">
-      <li class="form__list-item" v-for="(note, id) in notes" :key="note.id">
-        <p class="form__checkbox-text">{{ note }}</p>
-        <remove-note theme="remove" @btn-click="removeNote(id)" type="button" />
-      </li>
-    </ul>
-    <submit-form theme="add" type="button" @btn-click="submitForm"
+    <todos :todos="todos" />
+    <submit-form theme="add" @btn-click="submitForm(title)"
       >Добавить</submit-form
     >
   </form>
@@ -44,53 +43,54 @@
 
 <script>
 import Button from "@/components/ui/Button";
-
+import Checkbox from "@/components/ui/Checkbox";
 export default {
   components: {
-    "note-button": Button,
+    "addTodo-button": Button,
     "submit-form": Button,
-    "remove-note": Button
+    todos: Checkbox
   },
   data() {
     return {
       title: "",
-      newNote: "",
-      notes: [],
-      errorName: "",
-      errorNotes: ""
+      errorTitleText: "",
+      errorTodoText: "",
+      newTodo: ""
     };
   },
+  computed: {
+    todos() {
+      return this.$store.getters.getTodos;
+    }
+  },
   methods: {
-    addNote() {
-      if (!this.newNote) return;
-      this.notes.push(this.newNote);
-      this.newNote = "";
-      this.errorNotes = "";
+    addTodo(newTodo) {
+      this.$store.dispatch("addTodo", newTodo);
+      this.validTodo();
+      this.newTodo = "";
     },
-    removeNote(id) {
-      this.notes.splice(id, 1);
-    },
-    submitForm() {
-      const card = {
-        id: Date.now(),
-        title: this.title,
-        notes: this.notes
-      };
-      this.$store.dispatch("submitForm", card);
-      if (this.notes.length === 0) {
-        this.errorNotes = "Должна быть хотя бы одна заметка";
-      } else {
-        this.errorNotes = "";
+    submitForm(title) {
+      if (!this.title || !this.todos.length) {
+        this.validName();
+        this.validTodo();
+        return;
       }
-      if (this.title === "" || this.notes.length === 0) return;
-      this.$store.dispatch("togglePopupVisible");
+      this.$store.dispatch("closePopup");
       this.title = "";
+      this.$store.dispatch("submitForm", title);
     },
-    validCard() {
-      if (this.title === "") {
-        this.errorName = "Введите название";
+    validTodo() {
+      if (!this.todos.length) {
+        this.errorTodoText = "Должна быть хотя бы одна заметка";
       } else {
-        this.errorName = "";
+        this.errorTodoText = "";
+      }
+    },
+    validName() {
+      if (!this.title) {
+        this.errorTitleText = "Введите название";
+      } else {
+        this.errorTitleText = "";
       }
     }
   }
@@ -144,23 +144,6 @@ export default {
 .form__img {
   width: 100%;
   height: 100%;
-}
-
-.form__list-items {
-  list-style: none;
-  padding: 0;
-}
-.form__list-item {
-  display: flex;
-  align-items: center;
-}
-.form__list-item:last-child {
-  margin-bottom: 25px;
-}
-.form__checkbox-text {
-  width: max-content;
-  font-size: 20px;
-  margin: 0 10px 0 0;
 }
 
 .error {

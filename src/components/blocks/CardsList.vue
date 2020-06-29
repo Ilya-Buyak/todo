@@ -1,14 +1,22 @@
 <template>
-  <ul v-if="hasCards" class="cards">
+  <ul v-if="cards.length" class="cards">
     <li class="card" v-for="(card, id) in cards" :key="card.id">
       <div class="card__header">
         <h2 class="card__title">{{ card.title }}</h2>
-        <delete-btn theme="remove" @btn-click="removeCard(id)" />
+        <delete-btn theme="remove" @btn-click="showRemoveCardPopup(id)" />
       </div>
-      <p class="card__text" v-for="note in card.notes" :key="note.id">
-        {{ note }}
+      <p
+        :class="['card__text', { card__text_completed: todo.completed }]"
+        v-for="todo in card.todos.slice(0, 3)"
+        :key="todo.id"
+      >
+        {{ todo.text }}
       </p>
-      <edit-btn theme="card">изменить</edit-btn>
+      <router-link :to="`/${card.id}`" class="card__router"
+        ><edit-btn theme="card" @btn-click="createCard(id)"
+          >изменить</edit-btn
+        ></router-link
+      >
     </li>
   </ul>
   <p v-else class="cards">Список пуст...</p>
@@ -21,14 +29,15 @@ export default {
   computed: {
     cards() {
       return this.$store.getters.getCards;
-    },
-    hasCards() {
-      return this.$store.getters.cardsLength;
     }
   },
   methods: {
-    removeCard(id) {
-      this.$store.dispatch("removeCard", id);
+    showRemoveCardPopup(id) {
+      this.$store.dispatch("showRemoveCardPopup");
+      this.$store.dispatch("setId", id);
+    },
+    createCard(id) {
+      this.$store.dispatch("createCard", id);
     }
   },
   components: {
@@ -71,7 +80,14 @@ export default {
   background-color: #fff;
 }
 .card__text {
+  font-size: 20px;
   margin: 10px 0 0 10px;
   color: #fff;
+}
+.card__text_completed {
+  text-decoration: line-through;
+}
+.card__router {
+  margin: auto 0 0 0;
 }
 </style>
