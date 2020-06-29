@@ -19,7 +19,8 @@ const mutations = {
     state.todos.push({
       text: newTodo,
       completed: false,
-      edit: false
+      edit: false,
+      id: Date.now()
     });
     state.errorTodoText = "";
   },

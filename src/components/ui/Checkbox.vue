@@ -8,6 +8,7 @@
             class="todo__input"
             type="checkbox"
             v-model="todo.completed"
+            :id="`${todo.id}`"
           />
           <input
             type="text"
@@ -15,7 +16,8 @@
             placeholder="редактировать"
             v-model="changedTodo"
           />
-          <p
+          <label
+            :for="`${todo.id}`"
             :class="[
               'todo__checkbox-text',
               { 'todo__checkbox-text_completed': todo.completed },
@@ -24,7 +26,7 @@
             ]"
           >
             {{ todo.text }}
-          </p>
+          </label>
           <div v-if="editPage" class="change__todo">
             <add-todo
               v-if="todo.edit"

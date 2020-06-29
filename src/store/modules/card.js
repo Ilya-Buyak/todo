@@ -32,7 +32,8 @@ const mutations = {
     state.cards[payload.index].todos.push({
       completed: false,
       edit: false,
-      text: payload.newTodo
+      text: payload.newTodo,
+      id: Date.now()
     });
   }
 };
