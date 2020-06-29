@@ -54,7 +54,6 @@ export default {
 }
 .button_theme_note {
   width: 15%;
-  height: 100%;
 }
 
 .button_theme_add {
