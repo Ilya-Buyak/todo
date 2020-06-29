@@ -135,7 +135,7 @@ export default {
   display: flex;
 }
 .form__container .form__fieldset {
-  width: 100%;
+  max-width: 100%;
 }
 .form__note {
   display: flex;
@@ -151,5 +151,10 @@ export default {
   line-height: 24px;
   color: #ed433f;
   height: 24px;
+}
+@media (max-width: 500px) {
+  .form__container {
+    flex-direction: column;
+  }
 }
 </style>
