@@ -13,7 +13,7 @@
           <input
             type="text"
             :class="['todo__input-text', { 'todo__input-text_on': todo.edit }]"
-            placeholder="редактировать"
+            :placeholder="`${todo.text}`"
             v-model="changedTodo"
           />
           <label
