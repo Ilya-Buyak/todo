@@ -41,6 +41,21 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: black;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
 
 .root {
   max-width: 1440px;
